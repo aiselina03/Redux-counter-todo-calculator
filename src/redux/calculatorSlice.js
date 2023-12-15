@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 export const calculatorSlice = createSlice({
   name: 'calculator',
@@ -16,11 +16,16 @@ export const calculatorSlice = createSlice({
       state.value = action.payload.number1 * action.payload.number2;
     },
     divide: (state, action) => {
-      state.value = action.payload.number1 / action.payload.number2;
+      const { number1, number2 } = action.payload;
+
+      if (number2 === 0) {
+        state.value = "Cannot divide by zero";
+      } else {
+        state.value = number1 / number2;
+      }
     },
   },
-})
+});
 
-export const { add, subtract, multiply, divide } = calculatorSlice.actions
-export default calculatorSlice.reducer
-
+export const { add, subtract, multiply, divide } = calculatorSlice.actions;
+export default calculatorSlice.reducer;
